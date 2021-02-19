@@ -3,13 +3,13 @@
 namespace A3020\AutoPageCacheClearer\Listener;
 
 use A3020\AutoPageCacheClearer\Handler;
-use Concrete\Core\Logging\Logger;
 use Exception;
+use Psr\Log\LoggerInterface;
 
 class PageVersionApprove
 {
     /**
-     * @var Logger
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
@@ -18,7 +18,7 @@ class PageVersionApprove
      */
     private $handler;
 
-    public function __construct(Logger $logger, Handler $handler)
+    public function __construct(LoggerInterface $logger, Handler $handler)
     {
         $this->logger = $logger;
         $this->handler = $handler;
@@ -34,7 +34,7 @@ class PageVersionApprove
         try {
             $this->handler->handle($event->getPageObject());
         } catch (Exception $e) {
-            $this->logger->addDebug($e->getMessage());
+            $this->logger->debug($e->getMessage());
         }
     }
 }
