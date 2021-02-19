@@ -11,7 +11,7 @@ final class Controller extends Package
 {
     protected $pkgHandle = 'auto_page_cache_clearer';
     protected $appVersionRequired = '8.3.1';
-    protected $pkgVersion = '1.0.1';
+    protected $pkgVersion = '1.1.0';
     protected $pkgAutoloaderRegistries = [
         'src/AutoPageCacheClearer' => '\A3020\AutoPageCacheClearer',
     ];

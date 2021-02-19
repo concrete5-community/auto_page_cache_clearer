@@ -3,11 +3,11 @@
 namespace A3020\AutoPageCacheClearer;
 
 use A3020\AutoPageCacheClearer\Listener\PageDelete;
+use A3020\AutoPageCacheClearer\Listener\PageDisplayOrderMove;
 use A3020\AutoPageCacheClearer\Listener\PageMove;
 use A3020\AutoPageCacheClearer\Listener\PageVersionApprove;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
-use Concrete\Core\Config\Repository\Repository;
 use Exception;
 use Psr\Log\LoggerInterface;
 
@@ -62,6 +62,12 @@ class Provider implements ApplicationAwareInterface
         $this->app['director']->addListener('on_page_move', function($event) {
             /** @var \A3020\AutoPageCacheClearer\Listener\PageMove $listener */
             $listener = $this->app->make(PageMove::class);
+            $listener->handle($event);
+        });
+
+        $this->app['director']->addListener('on_page_display_order_update', function($event) {
+            /** @var \A3020\AutoPageCacheClearer\Listener\PageDisplayOrderMove $listener */
+            $listener = $this->app->make(PageDisplayOrderMove::class);
             $listener->handle($event);
         });
     }
